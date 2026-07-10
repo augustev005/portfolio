@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="admin-dashboard-body">
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="container dashboard-header-container">
+            <div class="dashboard-brand">
+                <a href="/" class="logo">agoscreate</a>
+                <span class="badge">Admin Portal</span>
+            </div>
+            <div class="dashboard-user">
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <!-- Dashboard Stats -->
+            <div class="dashboard-overview">
+                <div class="overview-title-section">
+                    <h1>Visitor Messages</h1>
+                    <p>Manage inquiries and contact requests sent from your portfolio website.</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Total Messages</span>
+                    <span class="stat-value">{{ messages|length }}</span>
+                </div>
+            </div>
+
+            <!-- Messages Container -->
+            <div class="messages-list-wrapper">
+                {% if messages %}
+                    <div class="messages-grid-layout">
+                        {% for msg in messages %}
+                            <div class="msg-card">
+                                <div class="msg-card-header">
+                                    <div class="sender-info">
+                                        <h3>{{ msg.name }}</h3>
+                                        <span class="msg-date"><i class="fa-regular fa-clock"></i> {{ msg.date or 'Unknown Date' }}</span>
+                                    </div>
+                                    <form action="{{ url_for('delete_message_route', msg_id=loop.index0) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this message?');">
+                                        <button type="submit" class="btn-delete-msg" title="Delete Message">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="msg-card-body">
+                                    <div class="contact-methods">
+                                        <div class="contact-method-item">
+                                            <i class="fa-regular fa-envelope"></i>
+                                            <a href="mailto:{{ msg.email }}">{{ msg.email }}</a>
+                                        </div>
+                                        <div class="contact-method-item">
+                                            <i class="fa-solid fa-phone"></i>
+                                            <a href="tel:{{ msg.phone }}">{{ msg.phone }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="msg-content-box">
+                                        <h4>Message:</h4>
+                                        <p>{{ msg.message | replace('\n', '<br>') | safe }}</p>
+                                    </div>
+                                </div>
+                                <div class="msg-card-footer">
+                                    <a href="mailto:{{ msg.email }}?subject=Re: Portfolio Inquiry" class="btn btn-outline btn-sm"><i class="fa-regular fa-envelope"></i> Reply Email</a>
+                                    <a href="https://wa.me/{{ msg.phone | replace(' ', '') | replace('+', '') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"><i class="fa-brands fa-whatsapp"></i> Chat WhatsApp</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <div class="empty-icon-wrapper">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <h3>No messages found</h3>
+                        <p>Inbox is clean! When visitors submit the contact form, their messages will appear here.</p>
+                        <a href="/" class="btn btn-outline btn-sm">Go to Homepage</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

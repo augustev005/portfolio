@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="admin-login-body">
+
+    <div class="login-wrapper">
+        <a href="/" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+        <div class="login-card">
+            <div class="login-header">
+                <div class="lock-icon-wrapper">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h2>Private Portal</h2>
+                <p>Please enter password to access dashboard</p>
+            </div>
+            
+            <form action="{{ url_for('admin_login') }}" method="POST" class="login-form">
+                <div class="form-group">
+                    <div class="input-icon-wrapper">
+                        <i class="fa-solid fa-lock input-icon-inner"></i>
+                        <input type="password" id="password" name="password" class="form-control padded-icon" placeholder="Enter Admin Password" required autofocus>
+                    </div>
+                </div>
+                {% if error %}
+                <div class="login-error-msg">
+                    <i class="fa-solid fa-circle-exclamation"></i> {{ error }}
+                </div>
+                {% endif %}
+                <button type="submit" class="btn btn-primary btn-full">Unlock Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

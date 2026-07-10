@@ -1,0 +1,12 @@
+--- New Message ---
+Name: John Doe
+Email: john@example.com
+Message: Hello Riya! I would love to collaborate on a new project.
+
+--- New Message ---
+Name: Test Visitor
+Email: testvisitor@example.com
+Phone: +1 234 567 890
+Date: 2026-07-10 18:27:01
+Message: Hello Akossiwa, this is a test message to verify the newly added contact form and email/admin notification system.
+
