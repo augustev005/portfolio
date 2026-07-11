@@ -195,8 +195,10 @@ def send_email_notification(name, email, phone, message):
 def index():
     return render_template('index.html', social=SOCIAL_LINKS)
 
-@app.route('/send-message', methods=['POST'])
+@app.route('/send-message', methods=['GET', 'POST'])
 def send_message():
+    if request.method == 'GET':
+        return "Message endpoint"
     data = request.form
     name = data.get('name')
     email = data.get('email')
@@ -234,7 +236,7 @@ def send_message():
 @app.before_request
 def admin_maintenance():
     if request.path.startswith('/admin'):
-        return "<div style='text-align: center; margin-top: 100px; font-family: sans-serif;'><h1>Admin Area Under Maintenance 🛠️</h1><p>We are currently performing scheduled maintenance. Please try again later.</p></div>", 503
+        return "<div style='text-align: center; margin-top: 100px; font-family: sans-serif;'><h1>Admin Area Under Maintenance 🛠️</h1><p>We are currently performing scheduled maintenance. Please try again later.</p></div>", 200
 
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
@@ -254,7 +256,7 @@ def admin_login():
             
     return render_template('admin_login.html', error=error)
 
-@app.route('/admin')
+@app.route('/admin/')
 def admin_dashboard():
     if not session.get('logged_in'):
         return redirect(url_for('admin_login'))

@@ -1,7 +1,6 @@
 --- New Message ---
-Name: John Doe
-Email: john@example.com
-Message: Hello Riya! I would love to collaborate on a new project.
+Name: Akossiwa Augustine ZOKPODO
+Email: augustev005@gmailcom Message: Hello Akossiwa! I would love to collaborate on a new project.
 
 --- New Message ---
 Name: Test Visitor
