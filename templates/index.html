@@ -39,6 +39,7 @@
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#education" class="nav-link">Education</a>
+                <a href="#articles" class="nav-link">Articles</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
@@ -513,6 +514,45 @@
             </div>
         </section>
 
+        <!-- Articles Section -->
+        <section id="articles" class="articles-section">
+            <div class="container">
+                <div class="projects-intro">
+                    <h2 class="section-title center">Articles</h2>
+                    <p class="section-subtitle">
+                        Freelance journalist and web content writer. I write on tradition, African culture,
+                        women's issues, and social realities in Togo, including work for Oozons.
+                    </p>
+                </div>
+                <div class="articles-grid" id="articlesGrid">
+                    <article class="article-card">
+                        <h3 class="article-title">Octobre Rose : et si on parlait du cancer autrement ?</h3>
+                        <p class="article-desc">
+                            On breast cancer awareness for Octobre Rose, and on talking about cancer differently.
+                        </p>
+                        <a class="article-link"
+                            href="https://medium.com/@augustev005/octobre-rose-et-si-on-parlait-du-cancer-autrement-674832cc69d1"
+                            target="_blank" rel="noopener noreferrer">Read more</a>
+                    </article>
+                    <!--
+                        Add another article by copying the card above.
+                        Optional: <time class="article-date" datetime="YYYY-MM">Month Year</time>
+                        Optional: the Read more link. Remove either line if you do not have it.
+                        The "Articles coming soon" note stays hidden while a card is present.
+                    -->
+                </div>
+                <div class="articles-empty" id="articlesEmpty">
+                    <div class="articles-empty-card">
+                        <h3>Articles coming soon</h3>
+                        <p>
+                            Freelance writing on tradition, African culture, women's issues, and social realities in Togo,
+                            including pieces for Oozons.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Services Section -->
         <section id="services" class="projects-section">
             <div class="container">
@@ -703,6 +743,14 @@
                 mobileToggle.classList.toggle('active');
                 navMenu.classList.toggle('active');
             });
+
+            const articlesGrid = document.getElementById('articlesGrid');
+            const articlesEmpty = document.getElementById('articlesEmpty');
+            if (articlesGrid && articlesEmpty) {
+                const hasArticles = articlesGrid.querySelector('.article-card');
+                articlesEmpty.hidden = Boolean(hasArticles);
+                articlesGrid.hidden = !hasArticles;
+            }
 
             // Close mobile menu when link clicked
             const navLinks = document.querySelectorAll('.nav-link');
