@@ -947,7 +947,17 @@ textarea.form-control {
         text-align: center;
     }
 
-    /* Mobile Nav */
+    .social-links {
+        width: 100%;
+        min-width: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 12px;
+    }
+}
+
+/* Collapse the nav before the extra Education link meets the Resume button */
+@media (max-width: 960px) {
     .mobile-toggle {
         display: flex;
     }
